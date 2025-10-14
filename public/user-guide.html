@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 가이드 - 안전 시험 학습 시스템</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .guide-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .guide-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .guide-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .guide-nav {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 2px solid #e9ecef;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .guide-nav h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 20px;
+            color: #495057;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .guide-content {
+            padding: 50px 40px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .section h4 {
+            font-size: 1.2rem;
+            color: #495057;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .section ul, .section ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .step-container {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .tip-box {
+            background: #fff9e6;
+            border: 2px dashed #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .tip-box::before {
+            content: "💡 Tip";
+            display: block;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #666;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .guide-header {
+                padding: 30px 20px;
+            }
+
+            .guide-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .guide-content {
+                padding: 30px 20px;
+            }
+
+            .guide-nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="guide-container">
+        <div class="guide-header">
+            <h1>📚 사용자 가이드</h1>
+            <p>안전 시험 학습 시스템 완벽 활용 가이드</p>
+        </div>
+
+        <div class="guide-nav">
+            <h3>빠른 이동</h3>
+            <div class="nav-links">
+                <a href="#intro" class="nav-link">시스템 소개</a>
+                <a href="#start" class="nav-link">시작하기</a>
+                <a href="#features" class="nav-link">주요 기능</a>
+                <a href="#modes" class="nav-link">학습 모드</a>
+                <a href="#study" class="nav-link">학습 전략</a>
+                <a href="#faq" class="nav-link">문제 해결</a>
+            </div>
+        </div>
+
+        <div class="guide-content">
+            <!-- 시스템 소개 -->
+            <section class="section" id="intro">
+                <h2>🎯 시스템 소개</h2>
+                
+                <h3>지원 시험</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🌪️</span>
+                        <div class="feature-title">재난안전 분야</div>
+                        <div class="feature-desc">방재기사, 방재안전직(국가/지방 7급, 9급)</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⚙️</span>
+                        <div class="feature-title">산업안전 분야</div>
+                        <div class="feature-desc">건설안전기사, 산업안전기사, 산업위생관리기사 등</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔥</span>
+                        <div class="feature-title">소방안전 분야</div>
+                        <div class="feature-desc">소방설비기사(기계분야) 등</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>📊 총 학습 데이터</strong>
+                    <ul style="margin-top: 10px; margin-bottom: 0;">
+                        <li>7개 시험 종류</li>
+                        <li>238개 회차</li>
+                        <li>28,560개 문제</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 시작하기 -->
+            <section class="section" id="start">
+                <h2>🚀 시작하기</h2>
+                
+                <div class="step-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>분야 선택</h4>
+                            <p>메인 페이지에서 <strong>"새로 시작하기"</strong> 버튼을 클릭하고, 재난안전 / 산업안전 / 소방안전 중 선택합니다.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>시험 선택</h4>
+                            <p>선택한 분야의 시험 목록을 확인하고, 준비 중인 시험을 선택합니다. "데이터 있음" 뱃지가 있는 시험만 학습 가능합니다.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>회차 선택</h4>
+                            <p>년도별로 정리된 회차 목록을 확인하고 원하는 회차를 클릭합니다.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>학습 시작</h4>
+                            <p><strong>"학습 시작"</strong> 버튼을 클릭하여 대시보드로 이동합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 주요 기능 -->
+            <section class="section" id="features">
+                <h2>✨ 주요 기능</h2>
+
+                <h3>D-Day 설정</h3>
+                <p>대시보드 상단 초록색 박스의 시험명을 클릭하여 시험 날짜를 설정할 수 있습니다.</p>
+                
+                <div class="success-box">
+                    <strong>표시 형식:</strong>
+                    <ul style="margin-top: 10px; margin-bottom: 0;">
+                        <li><strong>시험 전:</strong> D-15 (15일 남음)</li>
+                        <li><strong>시험 당일:</strong> D-DAY</li>
+                        <li><strong>시험 후:</strong> D+3 (3일 지남)</li>
+                    </ul>
+                </div>
+
+                <h3>학습 통계 대시보드</h3>
+                
+                <h4>상단 통계 (초록색 박스)</h4>
+                <ul>
+                    <li><strong>시험까지:</strong> D-Day 카운터</li>
+                    <li><strong>총 문제수:</strong> 선택한 회차의 전체 문제 수</li>
+                    <li><strong>완료한 문제:</strong> 실제로 푼 문제 수</li>
+                    <li><strong>정답률:</strong> 전체 정답률 (%)</li>
+                </ul>
+
+                <h4>하단 상세 통계</h4>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">📊</span>
+                        <div class="feature-title">전체 진행률</div>
+                        <div class="feature-desc">전체 문제 중 몇 개를 풀었는지 진행률 바로 표시</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📅</span>
+                        <div class="feature-title">오늘의 학습</div>
+                        <div class="feature-desc">하루 목표 20문제, 오늘 푼 문제 수 및 진행률</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⚠️</span>
+                        <div class="feature-title">약점 과목</div>
+                        <div class="feature-desc">정답률이 가장 낮은 과목 표시 (3문제 이상 필요)</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔥</span>
+                        <div class="feature-title">연속 학습</div>
+                        <div class="feature-desc">연속으로 학습한 일수, 매일 학습 시 증가</div>
+                    </div>
+                </div>
+
+                <h3>오답노트</h3>
+                <ul>
+                    <li>틀린 문제 자동 저장</li>
+                    <li>복습 모드에서 집중 학습</li>
+                    <li>문제별 틀린 이력 관리</li>
+                </ul>
+
+                <h3>북마크</h3>
+                <ul>
+                    <li>중요한 문제 표시 기능</li>
+                    <li>별표(⭐) 버튼으로 저장</li>
+                    <li>북마크 복습 모드 지원</li>
+                </ul>
+            </section>
+
+            <!-- 학습 모드 -->
+            <section class="section" id="modes">
+                <h2>📖 학습 모드</h2>
+
+                <h3>1. 전체 문제 풀이</h3>
+                <div class="info-box">
+                    <strong>추천 대상:</strong> 체계적 학습을 원하는 수험생
+                </div>
+                <ul>
+                    <li>선택한 회차의 모든 문제 출제</li>
+                    <li>순서대로 진행</li>
+                    <li>중단 시 이어하기 가능</li>
+                    <li>진도율 자동 저장</li>
+                </ul>
+
+                <h3>2. 오답노트 복습</h3>
+                <div class="info-box">
+                    <strong>추천 대상:</strong> 취약 부분 집중 보완
+                </div>
+                <ul>
+                    <li>이전에 틀린 문제만 출제</li>
+                    <li>반복 학습으로 약점 보완</li>
+                    <li>3회 연속 정답 시 오답노트에서 제거 권장</li>
+                </ul>
+                <div class="tip-box">
+                    정기적으로 복습하여 오답노트를 비우는 것이 목표입니다!
+                </div>
+
+                <h3>3. 랜덤 20문제</h3>
+                <div class="info-box">
+                    <strong>추천 대상:</strong> 빠른 실력 점검
+                </div>
+                <ul>
+                    <li>전체 문제에서 무작위 20개 선정</li>
+                    <li>짧은 시간에 학습 가능 (약 15~20분)</li>
+                    <li>다양한 유형 경험</li>
+                </ul>
+
+                <h3>4. 타이머 모드</h3>
+                <div class="info-box">
+                    <strong>추천 대상:</strong> 실전 연습
+                </div>
+                <ul>
+                    <li>실제 시험과 동일한 제한 시간</li>
+                    <li>긴장감 있는 학습 환경</li>
+                    <li>시간 관리 연습</li>
+                    <li>일반적으로 문제당 1~2분 제한</li>
+                </ul>
+
+                <h3>5. 북마크 복습</h3>
+                <div class="info-box">
+                    <strong>추천 대상:</strong> 중요 문제 재확인
+                </div>
+                <ul>
+                    <li>별표 표시한 문제만 출제</li>
+                    <li>헷갈리는 문제 반복 학습</li>
+                </ul>
+
+                <h3>6. 과목별 학습</h3>
+                <div class="info-box">
+                    <strong>추천 대상:</strong> 특정 과목 집중 학습
+                </div>
+                <ul>
+                    <li>과목별로 문제 필터링</li>
+                    <li>약점 과목 집중 공략</li>
+                </ul>
+                <p><strong>예시 과목:</strong> 안전관리론, 산업심리 및 교육, 기계위험방지기술, 전기위험방지기술</p>
+            </section>
+
+            <!-- 학습 전략 -->
+            <section class="section" id="study">
+                <h2>🎓 학습 전략 가이드</h2>
+
+                <h3>단계별 학습법</h3>
+
+                <div class="step-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>전체 파악 (1~2주)</h4>
+                            <ul>
+                                <li>"전체 문제 풀이" 모드로 한 회차 완료</li>
+                                <li>전체 난이도와 출제 경향 파악</li>
+                                <li>약점 과목 확인</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>집중 학습 (2~4주)</h4>
+                            <ul>
+                                <li>"과목별 학습"으로 약점 과목 집중</li>
+                                <li>틀린 문제는 즉시 오답노트에 추가</li>
+                                <li>매일 "랜덤 20문제"로 꾸준히 학습</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>복습 강화 (1~2주)</h4>
+                            <ul>
+                                <li>"오답노트 복습" 매일 진행</li>
+                                <li>북마크한 중요 문제 재확인</li>
+                                <li>전체 문제를 한 번 더 풀기</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>실전 대비 (시험 1주 전)</h4>
+                            <ul>
+                                <li>"타이머 모드"로 실전 연습</li>
+                                <li>시간 관리 훈련</li>
+                                <li>최종 오답노트 정리</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>효율적인 학습 팁</h3>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">📅</span>
+                        <div class="feature-title">매일 학습</div>
+                        <div class="feature-desc">목표: 하루 20문제 이상<br>연속 학습으로 습관 형성</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">❌</span>
+                        <div class="feature-title">오답 관리</div>
+                        <div class="feature-desc">틀린 이유 분석<br>3일 후 다시 풀어보기</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⭐</span>
+                        <div class="feature-title">북마크 활용</div>
+                        <div class="feature-desc">헷갈리는 개념 문제<br>자주 출제되는 유형</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⏱️</span>
+                        <div class="feature-title">타이머 활용</div>
+                        <div class="feature-desc">시험 2주 전부터<br>매일 시간 관리 연습</div>
+                    </div>
+                </div>
+
+                <h3>시험 시기별 학습 전략</h3>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>시험까지</th>
+                                <th>학습 전략</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>30일 전</strong></td>
+                                <td>전체 문제 1회독, 출제 경향 파악, 약점 과목 파악</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2주 전</strong></td>
+                                <td>오답노트 집중 복습, 과목별 학습으로 약점 보완, 타이머 모드 연습 시작</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1주 전</strong></td>
+                                <td>매일 타이머 모드 실전 연습, 오답노트 완전 정리, 중요 북마크 최종 복습</td>
+                            </tr>
+                            <tr>
+                                <td><strong>전날</strong></td>
+                                <td>가볍게 랜덤 20문제, 북마크만 빠르게 복습, 일찍 취침</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 문제 해결 -->
+            <section class="section" id="faq">
+                <h2>❓ 자주 묻는 질문 (FAQ)</h2>
+
+                <h3>Q1. 학습 시작 버튼이 안 눌려요</h3>
+                <p><strong>원인:</strong> 회차를 선택하지 않았거나, JavaScript 오류</p>
+                <div class="success-box">
+                    <strong>해결 방법:</strong>
+                    <ol style="margin-top: 10px; margin-bottom: 0;">
+                        <li>회차 카드를 다시 클릭</li>
+                        <li>페이지 새로고침 (F5)</li>
+                        <li>브라우저 캐시 삭제 후 재접속</li>
+                        <li>다른 브라우저로 시도</li>
+                    </ol>
+                </div>
+
+                <h3>Q2. 분야 선택 화면이 비어있어요</h3>
+                <p><strong>원인:</strong> exams-config.js 로딩 실패 또는 인코딩 오류</p>
+                <div class="success-box">
+                    <strong>해결 방법:</strong>
+                    <ol style="margin-top: 10px; margin-bottom: 0;">
+                        <li>브라우저 캐시 삭제</li>
+                        <li>강력 새로고침 (Ctrl + Shift + R)</li>
+                        <li>브라우저 콘솔(F12) 확인 후 에러 메시지 확인</li>
+                    </ol>
+                </div>
+
+                <h3>Q3. 통계가 이상하게 표시돼요</h3>
+                <p><strong>원인:</strong> localStorage 데이터 손상</p>
+                <div class="success-box">
+                    <strong>해결 방법:</strong>
+                    <ol style="margin-top: 10px; margin-bottom: 0;">
+                        <li>"설정 변경" 후 재선택</li>
+                        <li>문제 지속 시 "모든 데이터 삭제" 후 재시작</li>
+                    </ol>
+                </div>
+
+                <h3>Q4. 다른 기기에서도 학습하고 싶어요</h3>
+                <p><strong>현재 상태:</strong> 기기 간 동기화 미지원</p>
+                <div class="warning-box">
+                    <strong>임시 해결:</strong> 한 기기에서만 학습하고 통계는 수동으로 기록<br>
+                    <strong>향후 계획:</strong> 데이터 내보내기/가져오기 기능 추가 예정
+                </div>
+
+                <h3>Q5. 문제에 오류가 있어요</h3>
+                <div class="success-box">
+                    <strong>대응 방법:</strong>
+                    <ol style="margin-top: 10px; margin-bottom: 0;">
+                        <li>해당 문제 번호와 내용 기록</li>
+                        <li>북마크로 표시</li>
+                        <li>관리자에게 문의</li>
+                    </ol>
+                </div>
+
+                <h3>Q6. D-Day가 업데이트되지 않아요</h3>
+                <div class="success-box">
+                    <strong>해결 방법:</strong>
+                    <ol style="margin-top: 10px; margin-bottom: 0;">
+                        <li>시험명(초록 박스) 다시 클릭</li>
+                        <li>날짜 재설정</li>
+                        <li>페이지 새로고침</li>
+                    </ol>
+                </div>
+
+                <h3>학습 데이터 관리</h3>
+                <div class="warning-box">
+                    <strong>⚠️ 중요:</strong> 현재 시스템은 브라우저의 localStorage를 사용합니다.
+                    <ul style="margin-top: 10px; margin-bottom: 0;">
+                        <li>브라우저 캐시 삭제 시 데이터 손실</li>
+                        <li>다른 기기에서는 데이터 동기화 안 됨</li>
+                        <li>개인정보보호 모드에서는 저장 안 될 수 있음</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>권장 사항:</strong>
+                    <ul style="margin-bottom: 0;">
+                        <li>동일한 브라우저에서 학습</li>
+                        <li>정기적으로 진도 확인</li>
+                        <li>중요한 통계는 별도 기록</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 브라우저 호환성 -->
+            <section class="section" id="compatibility">
+                <h2>🌐 브라우저 호환성</h2>
+
+                <h3>권장 브라우저</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">✅</span>
+                        <div class="feature-title">Chrome</div>
+                        <div class="feature-desc">버전 90 이상</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">✅</span>
+                        <div class="feature-title">Edge</div>
+                        <div class="feature-desc">버전 90 이상</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">✅</span>
+                        <div class="feature-title">Firefox</div>
+                        <div class="feature-desc">버전 88 이상</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">✅</span>
+                        <div class="feature-title">Safari</div>
+                        <div class="feature-desc">버전 14 이상</div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>비권장:</strong>
+                    <ul style="margin-top: 10px; margin-bottom: 0;">
+                        <li>Internet Explorer (지원 종료)</li>
+                        <li>구버전 모바일 브라우저</li>
+                    </ul>
+                </div>
+
+                <h3>모바일 사용</h3>
+                <h4>지원 기능</h4>
+                <ul>
+                    <li>반응형 디자인 적용</li>
+                    <li>터치 인터페이스 지원</li>
+                    <li>세로/가로 모드 모두 지원</li>
+                </ul>
+
+                <h4>제한사항</h4>
+                <ul>
+                    <li>작은 화면에서 일부 통계 축소 표시</li>
+                    <li>복잡한 차트는 생략</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>권장 사항:</strong>
+                    <ul style="margin-bottom: 0;">
+                        <li>태블릿 이상 권장</li>
+                        <li>가로 모드 사용 권장</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 단축키 -->
+            <section class="section" id="shortcuts">
+                <h2>⌨️ 단축키</h2>
+                <p>문제 풀이 화면에서 사용 가능한 단축키입니다.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>단축키</th>
+                                <th>기능</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>1</code>, <code>2</code>, <code>3</code>, <code>4</code></td>
+                                <td>선택지 선택</td>
+                            </tr>
+                            <tr>
+                                <td><code>←</code></td>
+                                <td>이전 문제</td>
+                            </tr>
+                            <tr>
+                                <td><code>→</code></td>
+                                <td>다음 문제</td>
+                            </tr>
+                            <tr>
+                                <td><code>Space</code></td>
+                                <td>다음 문제</td>
+                            </tr>
+                            <tr>
+                                <td><code>B</code></td>
+                                <td>북마크 추가/제거</td>
+                            </tr>
+                            <tr>
+                                <td><code>S</code></td>
+                                <td>건너뛰기</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 용어 설명 -->
+            <section class="section" id="terms">
+                <h2>📝 용어 설명</h2>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>용어</th>
+                                <th>설명</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>회차</strong></td>
+                                <td>시험이 실시된 연도와 순서 (예: 2022년 1회)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>세션</strong></td>
+                                <td>회차와 동일한 의미</td>
+                            </tr>
+                            <tr>
+                                <td><strong>오답노트</strong></td>
+                                <td>틀린 문제 저장 기능</td>
+                            </tr>
+                            <tr>
+                                <td><strong>북마크</strong></td>
+                                <td>중요 문제 표시 기능</td>
+                            </tr>
+                            <tr>
+                                <td><strong>진척도</strong></td>
+                                <td>전체 진행 상황</td>
+                            </tr>
+                            <tr>
+                                <td><strong>D-Day</strong></td>
+                                <td>시험일까지 남은 날</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 향후 업데이트 -->
+            <section class="section" id="updates">
+                <h2>🔮 향후 업데이트 계획</h2>
+
+                <h3>현재 버전 기능</h3>
+                <ul>
+                    <li>238개 회차 지원</li>
+                    <li>6가지 학습 모드</li>
+                    <li>자동 통계 분석</li>
+                    <li>오답노트/북마크</li>
+                    <li>D-Day 설정</li>
+                </ul>
+
+                <h3>추가 예정 기능</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">💾</span>
+                        <div class="feature-title">데이터 백업</div>
+                        <div class="feature-desc">학습 데이터 백업 및 복원 기능</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📈</span>
+                        <div class="feature-title">통계 그래프</div>
+                        <div class="feature-desc">시각적 학습 통계 분석</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🤖</span>
+                        <div class="feature-title">AI 추천</div>
+                        <div class="feature-desc">AI 기반 맞춤 학습 추천</div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📝</span>
+                        <div class="feature-title">모의고사</div>
+                        <div class="feature-desc">실전 모의고사 모드</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 마치며 -->
+            <section class="section" id="conclusion">
+                <h2>🎓 마치며</h2>
+
+                <div class="success-box">
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        이 학습 시스템은 효율적인 시험 준비를 위해 설계되었습니다.<br><br>
+                        <strong style="font-size: 1.2rem;">핵심은 꾸준함입니다:</strong>
+                    </p>
+                    <ul style="margin-top: 15px; font-size: 1.05rem;">
+                        <li>매일 조금씩 학습</li>
+                        <li>오답 반복 학습</li>
+                        <li>실전 연습</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: #2ecc71;">
+                        여러분의 합격을 응원합니다! 🎓
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="index.html" class="back-button">
+                        🏠 메인 페이지로 돌아가기
+                    </a>
+                </div>
+            </section>
+
+            <!-- 문서 정보 -->
+            <section class="section" style="text-align: center; padding-top: 40px; border-top: 2px solid #e9ecef;">
+                <p style="color: #95a5a6; font-size: 0.95rem;">
+                    <strong>문서 버전:</strong> 1.0<br>
+                    <strong>최종 수정:</strong> 2025년 10월 1일<br>
+                    <strong>시스템 버전:</strong> v1.0.0
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 스크롤 시 네비게이션 하이라이트
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.background = 'white';
+                link.style.color = '#495057';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#667eea';
+                    link.style.color = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

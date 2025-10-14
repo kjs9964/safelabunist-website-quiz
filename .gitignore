@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Vercel
+.vercel
+
+# PDF files
+public/data/*.pdf
+public/data/database/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup
+.git.backup/
