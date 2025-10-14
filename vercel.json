@@ -10,20 +10,5 @@
       "src": "/api/(.*)",
       "dest": "/api/$1"
     }
-  ],
-  "headers": [
-    {
-      "source": "/data/database/(.*).pdf",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/pdf"
-        },
-        {
-          "key": "Content-Disposition",
-          "value": "attachment"
-        }
-      ]
-    }
   ]
 }
