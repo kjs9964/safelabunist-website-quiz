@@ -18,3 +18,11 @@ Thumbs.db
 
 # Backup
 .git.backup/
+
+# 🆕 PDF 관련 (GitHub Releases 사용하므로 Git에서 제외)
+public/data/database/한글pdf파일/**/*.pdf
+public/data/*.pdf
+
+# 🆕 임시 폴더
+.temp-pdfs/
+temp/

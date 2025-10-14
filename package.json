@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "건설안전기사 문제풀이 웹앱 - Vercel 최적화",
   "scripts": {
-    "build": "echo 'Static files ready'"
+    "build": "echo 'Static files ready'",
+    "dev": "vercel dev",
+    "migrate-csv": "node complete-migration.js",
+    "migrate-pdf": "node complete-migration-pdf.js migrate",
+    "upload-pdfs": "node scripts/upload-pdfs-to-releases.js",
+    "update-pdfs": "npm run upload-pdfs",
+    "check-gh": "gh --version"
   },
   "keywords": [
     "quiz",

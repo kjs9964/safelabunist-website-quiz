@@ -765,6 +765,21 @@
             loadBookmarks();
             checkSavedProgress();
         });
+        // ========================================
+        // 🆕 GitHub Releases 설정
+        // ========================================
+        const GITHUB_CONFIG = {
+            owner: 'kjs9964',      // 🔴 본인의 GitHub 사용자명으로 변경!
+            repo: 'safelabunist-website-quiz',             // 🔴 본인의 저장소 이름으로 변경!
+            releaseTag: 'pdfs-v1.0'
+        };
+
+        // 🆕 GitHub Releases PDF URL 생성
+        function getPdfUrlFromGitHub(fileName) {
+            // GitHub Releases URL 패턴
+            // https://github.com/{owner}/{repo}/releases/download/{tag}/{filename}
+            return `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/${GITHUB_CONFIG.releaseTag}/${fileName}`;
+        }
 
         // 🆕 PDF 파일명 생성 함수
         function getPdfFileName(question) {
