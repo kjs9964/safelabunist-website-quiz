@@ -923,6 +923,22 @@
             }
         }
 
+        function checkSavedProgress() {
+            const savedProgress = localStorage.getItem('quizProgress');
+            if (savedProgress) {
+                try {
+                    const progress = JSON.parse(savedProgress);
+                    if (progress.sessionId === config.session && progress.mode === mode) {
+                        document.getElementById('resumeModal').classList.add('active');
+                        return;
+                    }
+                } catch (e) {
+                    console.error('진행 상황 로드 오류:', e);
+                }
+            }
+            startFresh();
+        }
+
         function resumeProgress() {
             try {
                 const savedProgress = JSON.parse(localStorage.getItem('quizProgress'));
