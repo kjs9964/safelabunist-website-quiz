@@ -176,8 +176,14 @@
             background: #e74c3c;
             color: white;
         }
+
+        /* 🆕 오류 신고 버튼 */
+        .btn-report-error {
+            background: #e67e22;
+            color: white;
+        }
         
-        .btn-bookmark:hover, .btn-skip:hover, .btn-save-exit:hover {
+        .btn-bookmark:hover, .btn-skip:hover, .btn-save-exit:hover, .btn-report-error:hover {
             transform: scale(1.05);
         }
         
@@ -197,7 +203,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* 🆕 PDF 알림 박스 스타일 */
         .image-notice {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
             border: 2px solid #ffc107;
@@ -229,7 +234,6 @@
             color: #856404;
         }
 
-        /* 🆕 PDF 열기 버튼 스타일 */
         .pdf-open-btn {
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
@@ -257,7 +261,6 @@
             transform: translateY(0);
         }
 
-        /* 마크다운 표 스타일 */
         .question-table {
             width: 100%;
             border-collapse: collapse;
@@ -288,7 +291,6 @@
             background: #e3f2fd;
         }
 
-        /* MathJax 수식 스타일 */
         .MathJax, .mjx-chtml {
             font-size: 1.15em !important;
             margin: 5px 0;
@@ -634,6 +636,95 @@
             transform: translateY(-2px);
         }
 
+        /* 🆕 오류 신고 모달 스타일 */
+        .error-report-modal .modal-content {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .error-report-modal h3 {
+            text-align: center;
+            color: #e74c3c;
+        }
+
+        .error-type-group {
+            margin: 20px 0;
+        }
+
+        .error-type-label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .error-type-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .error-type-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .error-type-option:hover {
+            border-color: #3498db;
+            background: #ebf5fb;
+        }
+
+        .error-type-option input[type="radio"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .error-type-option label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .error-details-group {
+            margin: 20px 0;
+        }
+
+        .error-details-label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .error-details-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-family: 'Malgun Gothic', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .error-details-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .error-report-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
         @media (max-width: 768px) {
             .quiz-container {
                 padding: 10px;
@@ -665,7 +756,6 @@
                 font-size: 0.95rem;
             }
 
-            /* 🆕 모바일에서 PDF 버튼 레이아웃 */
             .image-notice {
                 flex-direction: column;
                 text-align: center;
@@ -674,6 +764,16 @@
             .pdf-open-btn {
                 width: 100%;
                 justify-content: center;
+            }
+
+            .question-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .action-btn {
+                flex: 1;
+                min-width: 45%;
             }
         }
     </style>
@@ -703,6 +803,7 @@
                 <div class="question-actions">
                     <button class="action-btn btn-bookmark" onclick="toggleBookmark()">⭐ 북마크</button>
                     <button class="action-btn btn-skip" onclick="skipQuestion()">⏭️ 건너뛰기</button>
+                    <button class="action-btn btn-report-error" onclick="openErrorReportModal()">🚨 오류 신고</button>
                     <button class="action-btn btn-save-exit" onclick="saveAndExit()">💾 저장 후 나가기</button>
                 </div>
             </div>
@@ -745,6 +846,50 @@
         </div>
     </div>
 
+    <!-- 🆕 오류 신고 모달 -->
+    <div class="modal-overlay error-report-modal" id="errorReportModal">
+        <div class="modal-content">
+            <h3>🚨 문제 오류 신고</h3>
+            <p>문제에서 발견한 오류를 신고해주세요. 검토 후 빠르게 수정하겠습니다.</p>
+            
+            <div class="error-type-group">
+                <label class="error-type-label">오류 유형 선택 *</label>
+                <div class="error-type-options">
+                    <div class="error-type-option">
+                        <input type="radio" name="errorType" id="errorType1" value="텍스트 오타">
+                        <label for="errorType1">📝 텍스트 오타 (문제 또는 선택지 내용의 오타)</label>
+                    </div>
+                    <div class="error-type-option">
+                        <input type="radio" name="errorType" id="errorType2" value="표 내용 누락 or 오타">
+                        <label for="errorType2">📊 표 내용 누락 or 오타 (표가 잘못되었거나 내용이 빠짐)</label>
+                    </div>
+                    <div class="error-type-option">
+                        <input type="radio" name="errorType" id="errorType3" value="이미지 문제인데 PDF 접근 불가능">
+                        <label for="errorType3">🖼️ 이미지 문제인데 PDF 접근 불가능 (PDF 링크 오류)</label>
+                    </div>
+                    <div class="error-type-option">
+                        <input type="radio" name="errorType" id="errorType4" value="기타">
+                        <label for="errorType4">❓ 기타 (위에 해당하지 않는 오류)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-details-group">
+                <label class="error-details-label">상세 내용 (선택)</label>
+                <textarea 
+                    class="error-details-textarea" 
+                    id="errorDetails" 
+                    placeholder="오류에 대한 추가 설명을 입력해주세요. (예: '선택지 3번의 '안전'이 '안전전'으로 오타')"
+                ></textarea>
+            </div>
+
+            <div class="error-report-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="submitErrorReport()">✅ 신고 제출</button>
+                <button class="modal-btn modal-btn-secondary" onclick="closeErrorReportModal()">취소</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentQuestions = [];
         let currentQuestionIndex = 0;
@@ -765,33 +910,19 @@
             loadBookmarks();
             checkSavedProgress();
         });
-        // ========================================
-        // 🆕 GitHub Releases 설정
-        // ========================================
+
+        // GitHub Releases 설정
         const GITHUB_CONFIG = {
             owner: 'kjs9964',
             repo: 'safelabunist-website-quiz',
             releaseTag: 'pdfs-v1.0'
         };
 
-        // 🆕 GitHub Releases PDF URL 생성 (뷰어 모드)
         function getPdfUrlFromGitHub(fileName) {
-            // GitHub Releases 원본 URL
             const rawUrl = `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/${GITHUB_CONFIG.releaseTag}/${fileName}`;
-            
-            // Google Docs Viewer 사용 (브라우저에서 바로 보기)
             return `https://docs.google.com/viewer?url=${encodeURIComponent(rawUrl)}&embedded=true`;
         }
 
-        // 대안: Mozilla PDF.js 뷰어 사용
-        function getPdfUrlFromGitHub_Alternative(fileName) {
-            const rawUrl = `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/${GITHUB_CONFIG.releaseTag}/${fileName}`;
-            
-            // Mozilla PDF.js 뷰어
-            return `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(rawUrl)}`;
-        }
-
-        // 🆕 PDF 파일명 생성 함수
         function getPdfFileName(question) {
             if (config.sessionInfo && config.sessionInfo.fileName) {
                 return config.sessionInfo.fileName.replace('.csv', '.pdf');
@@ -871,7 +1002,6 @@
             return `${examCode}-${year}-${sessionCode}.pdf`;
         }
 
-        // 🆕 PDF 열기 함수 (알림 없음)
         function openPdf(fileName) {
             if (!fileName) {
                 console.error('⚠️ PDF 파일명을 생성할 수 없습니다.');
@@ -883,15 +1013,12 @@
             console.log('📄 PDF 열기 시도:', pdfUrl);
             console.log('   파일명:', fileName);
             
-            // 새 탭에서 PDF 뷰어 열기
             const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
             
             if (!newWindow) {
-                // 팝업이 차단된 경우 - 콘솔에만 로그
                 console.warn('⚠️ 팝업이 차단되었습니다. 브라우저 설정에서 팝업을 허용해주세요.');
                 console.log('🔗 PDF URL:', pdfUrl);
                 
-                // 클립보드에 자동 복사 (조용히)
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(pdfUrl).then(() => {
                         console.log('✅ PDF URL이 클립보드에 복사되었습니다.');
@@ -904,7 +1031,6 @@
             }
         }
 
-        // 🆕 디버그 함수
         function debugPdfInfo() {
             const question = currentQuestions[currentQuestionIndex];
             const pdfFileName = getPdfFileName(question);
@@ -1032,7 +1158,6 @@
             return `${session}_${subject}_${qid}_${qtext}`;
         }
 
-        // 마크다운 표를 HTML 테이블로 변환하는 함수
         function convertMarkdownTable(text) {
             const lines = text.split('\\n').map(line => line.trim()).filter(line => line);
             
@@ -1161,7 +1286,6 @@
             return modeNames[mode] || '문제 풀이';
         }
 
-        // MathJax 안전 렌더링 함수 (개선됨)
         function renderMathJax(element) {
             if (!element) return;
             
@@ -1195,7 +1319,6 @@
             const questionTextDiv = document.getElementById('questionText');
             let questionText = question.question || '문제 내용이 없습니다.';
             
-            // \n을 <br>로 변환하되, 표 형식이면 테이블로 변환
             if (questionText.includes('\\n') && questionText.includes('|')) {
                 questionText = convertMarkdownTable(questionText);
             } else {
@@ -1204,14 +1327,12 @@
             
             questionTextDiv.innerHTML = questionText;
             
-            // 🆕 이미지 포함 여부 확인 및 PDF 버튼 표시
             const hasImage = question.questionImage && 
                             question.questionImage.trim() !== '' && 
                             question.questionImage.toUpperCase() !== 'X';
             
             if (hasImage) {
                 if (question.questionImage.toUpperCase() === 'O') {
-                    // 이미지가 있다는 표시만 있는 경우 - PDF 버튼 표시
                     const imageNotice = document.createElement('div');
                     imageNotice.className = 'image-notice';
                     
@@ -1228,7 +1349,6 @@
                     `;
                     questionTextDiv.appendChild(imageNotice);
                 } else {
-                    // 실제 이미지 URL이 있는 경우
                     const imgElement = document.createElement('img');
                     imgElement.src = question.questionImage;
                     imgElement.className = 'question-image';
@@ -1255,7 +1375,6 @@
                 }
             }
             
-            // MathJax 렌더링
             renderMathJax(questionTextDiv);
             
             document.getElementById('currentNum').textContent = currentQuestionIndex + 1;
@@ -1296,8 +1415,6 @@
                 })(labels[index], index + 1);
                 
                 let optionText = question[option] || `선택지 ${labels[index]}`;
-                
-                // 선택지도 이중 백슬래시 변환
                 optionText = optionText.replace(/\\\\/g, '\\');
                 
                 div.innerHTML = `
@@ -1306,7 +1423,6 @@
                 `;
                 container.appendChild(div);
                 
-                // 선택지에도 MathJax 렌더링 적용
                 const optionContent = div.querySelector('.option-content');
                 if (optionContent) {
                     renderMathJax(optionContent);
@@ -1356,14 +1472,12 @@
                 }
             }
 
-            // 🆕 상세 답안 기록 저장 추가
             saveDetailedAnswer(question, letter, correctAnswer, isCorrect);
 
             skippedQuestions.delete(currentQuestionIndex);
             updateAccuracyRate();
             saveCurrentProgress();
         }
-
 
         function updateAccuracyRate() {
             let answeredCount = 0;
@@ -1767,6 +1881,7 @@
                         <div class="question-actions">
                             <button class="action-btn btn-bookmark" onclick="toggleBookmark()">⭐ 북마크</button>
                             <button class="action-btn btn-skip" onclick="skipQuestion()">⏭️ 건너뛰기</button>
+                            <button class="action-btn btn-report-error" onclick="openErrorReportModal()">🚨 오류 신고</button>
                             <button class="action-btn btn-save-exit" onclick="saveAndExit()">💾 저장 후 나가기</button>
                         </div>
                     </div>
@@ -1818,6 +1933,7 @@
                         <div class="question-actions">
                             <button class="action-btn btn-bookmark" onclick="toggleBookmark()">⭐ 북마크</button>
                             <button class="action-btn btn-skip" onclick="skipQuestion()">⏭️ 건너뛰기</button>
+                            <button class="action-btn btn-report-error" onclick="openErrorReportModal()">🚨 오류 신고</button>
                             <button class="action-btn btn-save-exit" onclick="saveAndExit()">💾 저장 후 나가기</button>
                         </div>
                     </div>
@@ -1872,6 +1988,7 @@
                             <div class="question-actions">
                                 <button class="action-btn btn-bookmark" onclick="toggleBookmark()">⭐ 북마크</button>
                                 <button class="action-btn btn-skip" onclick="skipQuestion()">⏭️ 건너뛰기</button>
+                                <button class="action-btn btn-report-error" onclick="openErrorReportModal()">🚨 오류 신고</button>
                                 <button class="action-btn btn-save-exit" onclick="saveAndExit()">💾 저장 후 나가기</button>
                             </div>
                         </div>
@@ -1919,7 +2036,6 @@
             }
         });
 
-        // 🆕 사용자 고유 ID 생성 함수
         function getUserId() {
             let userId = localStorage.getItem('anonymousUserId');
             if (!userId) {
@@ -1929,7 +2045,6 @@
             return userId;
         }
 
-        // 🆕 상세 답안 기록 저장 함수
         function saveDetailedAnswer(question, userAnswer, correctAnswer, isCorrect) {
             try {
                 const detailedAnswers = JSON.parse(localStorage.getItem('detailedAnswers') || '[]');
@@ -1963,6 +2078,67 @@
             } catch (e) {
                 console.error('상세 답안 저장 오류:', e);
             }
+        }
+
+        // 🆕 오류 신고 모달 열기
+        function openErrorReportModal() {
+            document.getElementById('errorReportModal').classList.add('active');
+        }
+
+        // 🆕 오류 신고 모달 닫기
+        function closeErrorReportModal() {
+            document.getElementById('errorReportModal').classList.remove('active');
+            document.getElementById('errorDetails').value = '';
+            document.querySelectorAll('input[name="errorType"]').forEach(radio => {
+                radio.checked = false;
+            });
+        }
+
+        // 🆕 오류 신고 제출
+        function submitErrorReport() {
+            const selectedType = document.querySelector('input[name="errorType"]:checked');
+            
+            if (!selectedType) {
+                alert('오류 유형을 선택해주세요.');
+                return;
+            }
+
+            const errorType = selectedType.value;
+            const errorDetails = document.getElementById('errorDetails').value.trim();
+            const question = currentQuestions[currentQuestionIndex];
+
+            const subject = encodeURIComponent(`[문제 오류 신고] ${config.examName || '시험'} - ${question.year}년 ${question.session}회`);
+            
+            let body = `=== 문제 오류 신고 ===
+
+📋 시험 정보:
+- 시험명: ${config.examName || '알 수 없음'}
+- 년도: ${question.year}년
+- 회차: ${question.session}회
+- 과목: ${question.subject}
+- 문제 번호: ${question.id || currentQuestionIndex + 1}
+
+🚨 오류 유형: ${errorType}
+
+📝 문제 내용:
+${question.question.substring(0, 200)}${question.question.length > 200 ? '...' : ''}
+
+${errorDetails ? `💬 상세 내용:\n${errorDetails}\n` : ''}
+---
+신고 시각: ${new Date().toLocaleString('ko-KR')}
+            `.trim();
+
+            body = encodeURIComponent(body);
+
+            const mailtoLink = `mailto:safelabunist@gmail.com?subject=${subject}&body=${body}`;
+            
+            window.location.href = mailtoLink;
+
+            closeErrorReportModal();
+            
+            setTimeout(() => {
+                alert('이메일 클라이언트가 열렸습니다.\n\n신고 내용을 확인하시고 전송해주세요.\n검토 후 빠르게 수정하겠습니다. 감사합니다!');
+            }, 500);
         }
     </script>
 </body>
