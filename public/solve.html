@@ -871,10 +871,10 @@
             return `${examCode}-${year}-${sessionCode}.pdf`;
         }
 
-        // 🆕 PDF 열기 함수
+        // 🆕 PDF 열기 함수 (알림 없음)
         function openPdf(fileName) {
             if (!fileName) {
-                alert('⚠️ PDF 파일명을 생성할 수 없습니다.\n시험 정보를 확인해주세요.');
+                console.error('⚠️ PDF 파일명을 생성할 수 없습니다.');
                 return;
             }
             
@@ -887,8 +887,11 @@
             const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
             
             if (!newWindow) {
-                alert(`⚠️ 팝업이 차단되었습니다.\n\n브라우저 설정에서 팝업을 허용하거나,\n아래 URL을 직접 복사하세요:\n\n${pdfUrl}`);
+                // 팝업이 차단된 경우 - 콘솔에만 로그
+                console.warn('⚠️ 팝업이 차단되었습니다. 브라우저 설정에서 팝업을 허용해주세요.');
+                console.log('🔗 PDF URL:', pdfUrl);
                 
+                // 클립보드에 자동 복사 (조용히)
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(pdfUrl).then(() => {
                         console.log('✅ PDF URL이 클립보드에 복사되었습니다.');
