@@ -769,24 +769,34 @@
         // 🆕 GitHub Releases 설정
         // ========================================
         const GITHUB_CONFIG = {
-            owner: 'kjs9964',                    // 🔴 본인의 실제 GitHub 사용자명
-            repo: 'safelabunist-website-quiz',        // 🔴 본인의 실제 저장소 이름
+            owner: 'kjs9964',
+            repo: 'safelabunist-website-quiz',
             releaseTag: 'pdfs-v1.0'
         };
 
-        // 🆕 GitHub Releases PDF URL 생성
+        // 🆕 GitHub Releases PDF URL 생성 (뷰어 모드)
         function getPdfUrlFromGitHub(fileName) {
-            return `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/${GITHUB_CONFIG.releaseTag}/${fileName}`;
+            // GitHub Releases 원본 URL
+            const rawUrl = `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/${GITHUB_CONFIG.releaseTag}/${fileName}`;
+            
+            // Google Docs Viewer 사용 (브라우저에서 바로 보기)
+            return `https://docs.google.com/viewer?url=${encodeURIComponent(rawUrl)}&embedded=true`;
+        }
+
+        // 대안: Mozilla PDF.js 뷰어 사용
+        function getPdfUrlFromGitHub_Alternative(fileName) {
+            const rawUrl = `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/${GITHUB_CONFIG.releaseTag}/${fileName}`;
+            
+            // Mozilla PDF.js 뷰어
+            return `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(rawUrl)}`;
         }
 
         // 🆕 PDF 파일명 생성 함수
         function getPdfFileName(question) {
-            // config에서 fileName 가져오기
             if (config.sessionInfo && config.sessionInfo.fileName) {
                 return config.sessionInfo.fileName.replace('.csv', '.pdf');
             }
             
-            // question 정보로 생성 (fallback)
             const testName = question.testName || question['Test Name'] || '';
             const year = question.year || question['Year'] || '';
             const session = question.session || question['Session'] || '';
@@ -796,7 +806,6 @@
                 return null;
             }
             
-            // 시험명 → 영어 매핑
             const examNameMap = {
                 '건설안전기사': 'const-safety',
                 '건설안전산업기사': 'const-safety-ind',
@@ -838,7 +847,6 @@
                 '지방9급': 'local-9-disaster'
             };
             
-            // 회차 변환
             const sessionMap = {
                 '안전관리론': 'safety',
                 '재난관리론': 'disaster',
@@ -853,7 +861,6 @@
                 return null;
             }
             
-            // 회차 처리
             let sessionCode;
             if (sessionMap[session]) {
                 sessionCode = sessionMap[session];
@@ -864,7 +871,7 @@
             return `${examCode}-${year}-${sessionCode}.pdf`;
         }
 
-        // 🆕 PDF 열기 함수 (GitHub Releases 사용)
+        // 🆕 PDF 열기 함수
         function openPdf(fileName) {
             if (!fileName) {
                 alert('⚠️ PDF 파일명을 생성할 수 없습니다.\n시험 정보를 확인해주세요.');
@@ -876,14 +883,12 @@
             console.log('📄 PDF 열기 시도:', pdfUrl);
             console.log('   파일명:', fileName);
             
-            // 새 탭에서 PDF 열기
-            const newWindow = window.open(pdfUrl, '_blank');
+            // 새 탭에서 PDF 뷰어 열기
+            const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
             
             if (!newWindow) {
-                // 팝업 차단된 경우
                 alert(`⚠️ 팝업이 차단되었습니다.\n\n브라우저 설정에서 팝업을 허용하거나,\n아래 URL을 직접 복사하세요:\n\n${pdfUrl}`);
                 
-                // 클립보드에 복사 시도
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(pdfUrl).then(() => {
                         console.log('✅ PDF URL이 클립보드에 복사되었습니다.');
@@ -892,7 +897,7 @@
                     });
                 }
             } else {
-                console.log('✅ PDF 새 탭에서 열림');
+                console.log('✅ PDF 뷰어가 새 탭에서 열렸습니다.');
             }
         }
 
@@ -900,7 +905,6 @@
         function debugPdfInfo() {
             const question = currentQuestions[currentQuestionIndex];
             const pdfFileName = getPdfFileName(question);
-            const pdfUrl = getPdfUrlFromGitHub(pdfFileName);
             
             console.log('========== PDF 정보 디버그 ==========');
             console.log('GitHub 설정:');
@@ -913,13 +917,19 @@
             console.log('  회차:', question.session || question['Session']);
             console.log('\n생성된 정보:');
             console.log('  PDF 파일명:', pdfFileName);
-            console.log('  전체 URL:', pdfUrl);
-            console.log('====================================');
             
-            // URL 복사
-            if (pdfFileName && navigator.clipboard) {
-                navigator.clipboard.writeText(pdfUrl);
-                console.log('\n✅ URL이 클립보드에 복사되었습니다!');
+            if (pdfFileName) {
+                const rawUrl = `https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/releases/download/${GITHUB_CONFIG.releaseTag}/${pdfFileName}`;
+                const viewerUrl = getPdfUrlFromGitHub(pdfFileName);
+                
+                console.log('  원본 URL:', rawUrl);
+                console.log('  뷰어 URL:', viewerUrl);
+                console.log('====================================');
+                
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(viewerUrl);
+                    console.log('\n✅ 뷰어 URL이 클립보드에 복사되었습니다!');
+                }
             }
         }
 
