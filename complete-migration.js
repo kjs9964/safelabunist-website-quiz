@@ -1,6 +1,5 @@
-// complete-migration.js - 전체 데이터베이스 마이그레이션 자동화 스크립트
-// 하위 폴더 재귀 탐색 + UTF-8 BOM 제거 + 모든 필수 함수 포함
-// 사용법: node complete-migration.js
+// complete-migration-fixed.js - 중복 매핑 제거 버전
+// 중복 examCode 문제 해결
 
 const fs = require('fs');
 const path = require('path');
@@ -14,7 +13,7 @@ const OUTPUT_DIR = './public/data';
 const CONFIG_OUTPUT = './public/exams-config.js';
 
 // ========================================
-// 시험명 매핑
+// 시험명 매핑 - 중복 제거 및 정리
 // ========================================
 const EXAM_MAP = {
   '건설안전기사': 'const-safety',
@@ -31,25 +30,59 @@ const EXAM_MAP = {
   '위험물산업기사': 'hazmat-ind',
   '위험물기능사': 'hazmat-tech',
   
-  // 소방
+  // 소방 - 중복 제거, (기계분야)/(전기분야)만 사용
   '소방설비기사(기계분야)': 'fire-equip-mech',
-  '소방설비기사(기계)': 'fire-equip-mech',
   '소방설비기사(전기분야)': 'fire-equip-elec',
-  '소방설비기사(전기)': 'fire-equip-elec',
-  '소방설비산업기사(기계)': 'fire-equip-ind-mech',
-  '소방설비산업기사(전기)': 'fire-equip-ind-elec',
+  '소방설비산업기사(기계분야)': 'fire-equip-ind-mech',
+  '소방설비산업기사(전기분야)': 'fire-equip-ind-elec',
   '소방시설관리사': 'fire-facility-mgr',
   '소방안전교육사': 'fire-safety-edu',
   '소방공무원(공개, 경력)': 'firefighter',
+  '소방공무원(공개)': 'firefighter-open',
+  '소방공무원(경력)': 'firefighter-career',
+  '소방공무원(공개,경력)': 'firefighter',
   '화재감식평가기사': 'fire-investigation',
+  '화재감식평가산업기사': 'fire-investigation-ind',
   '화재감식산업기사': 'fire-investigation-ind',
   '경비지도사(소방학)': 'security-fire',
+  '경비지도사2차(소방학)': 'security-fire',
   
   // 방재
   '방재기사': 'disaster-prev',
   '방재안전직(국가9급)': 'nat-9-disaster',
   '방재안전직(국가7급)': 'nat-7-disaster',
   '방재안전직(지방9급)': 'local-9-disaster'
+};
+
+// examCode → 표준 examName 역매핑 테이블
+const REVERSE_EXAM_MAP = {
+  'const-safety': '건설안전기사',
+  'const-safety-ind': '건설안전산업기사',
+  'ind-safety': '산업안전기사',
+  'ind-safety-ind': '산업안전산업기사',
+  'ind-hygiene': '산업위생관리기사',
+  'ind-hygiene-ind': '산업위생관리산업기사',
+  'ergonomics': '인간공학기사',
+  'ind-safety-advisor': '산업안전지도사',
+  'hazmat-master': '위험물기능장',
+  'hazmat-ind': '위험물산업기사',
+  'hazmat-tech': '위험물기능사',
+  'fire-equip-mech': '소방설비기사(기계분야)',
+  'fire-equip-elec': '소방설비기사(전기분야)',
+  'fire-equip-ind-mech': '소방설비산업기사(기계분야)',
+  'fire-equip-ind-elec': '소방설비산업기사(전기분야)',
+  'fire-facility-mgr': '소방시설관리사',
+  'fire-safety-edu': '소방안전교육사',
+  'firefighter': '소방공무원(공개, 경력)',
+  'firefighter-open': '소방공무원(공개, 경력)',
+  'firefighter-career': '소방공무원(공개, 경력)',
+  'fire-investigation': '화재감식평가기사',
+  'fire-investigation-ind': '화재감식평가산업기사',
+  'security-fire': '경비지도사(소방학)',
+  'disaster-prev': '방재기사',
+  'nat-9-disaster': '방재안전직(국가9급)',
+  'nat-7-disaster': '방재안전직(국가7급)',
+  'local-9-disaster': '방재안전직(지방9급)'
 };
 
 // 카테고리 매핑
@@ -61,9 +94,10 @@ const CATEGORY_MAP = {
     '위험물기능장', '위험물산업기사', '위험물기능사'
   ],
   '소방안전': [
-    '소방설비기사(기계분야)', '소방설비기사(기계)', '소방설비기사(전기)', '소방설비산업기사(기계)', '소방설비산업기사(전기)',
+    '소방설비기사(기계분야)', '소방설비기사(전기분야)', 
+    '소방설비산업기사(기계분야)', '소방설비산업기사(전기분야)',
     '소방시설관리사', '소방안전교육사', '소방공무원(공개, 경력)', 
-    '화재감식평가기사', '화재감식산업기사', '경비지도사(소방학)'
+    '화재감식평가기사', '화재감식평가산업기사', '경비지도사(소방학)'
   ]
 };
 
@@ -74,11 +108,11 @@ const ICON_MAP = {
   '산업위생관리기사': '🔬', '산업위생관리산업기사': '🔬',
   '인간공학기사': '🧠', '산업안전지도사': '👷',
   '위험물기능장': '⚠️', '위험물산업기사': '⚠️', '위험물기능사': '⚠️',
-  '소방설비기사(기계분야)': '⚙️', '소방설비기사(기계)': '⚙️', '소방설비기사(전기)': '⚡',
-  '소방설비산업기사(기계)': '⚙️', '소방설비산업기사(전기)': '⚡',
+  '소방설비기사(기계분야)': '⚙️', '소방설비기사(전기분야)': '⚡',
+  '소방설비산업기사(기계분야)': '⚙️', '소방설비산업기사(전기분야)': '⚡',
   '소방시설관리사': '🏢', '소방안전교육사': '👨‍🏫',
   '소방공무원(공개, 경력)': '👨‍🚒',
-  '화재감식평가기사': '🔍', '화재감식산업기사': '🔍',
+  '화재감식평가기사': '🔍', '화재감식평가산업기사': '🔍',
   '경비지도사(소방학)': '🛡️',
   '방재기사': '🏗️',
   '방재안전직(국가9급)': '👨‍✈️',
@@ -127,6 +161,109 @@ function convertExtraPattern(originalName) {
   if (!examCode) return null;
   
   return { fileName: `${examCode}-${year}-${session}-extra.csv`, examName, year, session: `${session}-extra` };
+}
+
+function convertSecurityPattern(originalName) {
+  const match = originalName.match(/^(\d{4})_경비지도사2차\(소방학\)\.csv$/);
+  if (!match) return null;
+  
+  const [_, year] = match;
+  const examCode = 'security-fire';
+  const examName = '경비지도사(소방학)';
+  
+  return { fileName: `${examCode}-${year}-1.csv`, examName, year, session: '1' };
+}
+
+function convertFirefighterPattern(originalName) {
+  let match = originalName.match(/^(\d{4})_소방공무원\(경력\)_(.+?)\.csv$/);
+  if (match) {
+    const [_, year, subject] = match;
+    const subjectMap = { '소방관계법규': 'law', '소방학개론': 'intro' };
+    const subjectCode = subjectMap[subject] || 'subject';
+    return { 
+      fileName: `firefighter-career-${year}-1-${subjectCode}.csv`, 
+      examName: '소방공무원(공개, 경력)', 
+      year, 
+      session: '1',
+      subject 
+    };
+  }
+  
+  match = originalName.match(/^(\d{4})_소방공무원\(공개\)_(.+?)\.csv$/);
+  if (match) {
+    const [_, year, subject] = match;
+    const subjectMap = { '소방관계법규': 'law', '소방학개론': 'intro' };
+    const subjectCode = subjectMap[subject] || 'subject';
+    return { 
+      fileName: `firefighter-open-${year}-1-${subjectCode}.csv`, 
+      examName: '소방공무원(공개, 경력)', 
+      year, 
+      session: '1',
+      subject 
+    };
+  }
+  
+  match = originalName.match(/^(\d{4})_소방공무원\(공개,경력\)_(.+?)\.csv$/);
+  if (match) {
+    const [_, year, subject] = match;
+    const subjectMap = { '소방관계법규': 'law', '소방학개론': 'intro' };
+    const subjectCode = subjectMap[subject] || 'subject';
+    return { 
+      fileName: `firefighter-${year}-1-${subjectCode}.csv`, 
+      examName: '소방공무원(공개, 경력)', 
+      year, 
+      session: '1',
+      subject 
+    };
+  }
+  
+  return null;
+}
+
+function convertFireFacilityPattern(originalName) {
+  const match = originalName.match(/^(\d{4})_소방시설관리사\.csv$/);
+  if (!match) return null;
+  
+  const [_, year] = match;
+  return { 
+    fileName: `fire-facility-mgr-${year}-1.csv`, 
+    examName: '소방시설관리사', 
+    year, 
+    session: '1' 
+  };
+}
+
+function convertFireEduPattern(originalName) {
+  const match = originalName.match(/^(\d{4})_소방안전교육사_([AB])형\.csv$/);
+  if (!match) return null;
+  
+  const [_, year, type] = match;
+  const sessionMap = { 'A': '1', 'B': '2' };
+  const session = sessionMap[type];
+  
+  return { 
+    fileName: `fire-safety-edu-${year}-${session}.csv`, 
+    examName: '소방안전교육사', 
+    year, 
+    session 
+  };
+}
+
+function convertIrregularPattern(originalName) {
+  const match = originalName.match(/^(\d{4})_(.+?)_(\d+)-(\d+)회\.csv$/);
+  if (!match) return null;
+  
+  const [_, year, examName, session1, session2] = match;
+  const examCode = EXAM_MAP[examName];
+  
+  if (!examCode) return null;
+  
+  return { 
+    fileName: `${examCode}-${year}-${session1}-${session2}.csv`, 
+    examName, 
+    year, 
+    session: `${session1}-${session2}` 
+  };
 }
 
 function convertGovExamPattern(originalName) {
@@ -179,6 +316,11 @@ function convertFileName(originalName) {
   return convertStandardPattern(originalName) ||
          convertMergedPattern(originalName) ||
          convertExtraPattern(originalName) ||
+         convertSecurityPattern(originalName) ||
+         convertFirefighterPattern(originalName) ||
+         convertFireFacilityPattern(originalName) ||
+         convertFireEduPattern(originalName) ||
+         convertIrregularPattern(originalName) ||
          convertGovExamPattern(originalName) ||
          convertDisasterPattern(originalName);
 }
@@ -221,6 +363,7 @@ function processAndCopyFiles() {
   let successCount = 0;
   let failCount = 0;
   const processedFiles = [];
+  const failedFiles = [];
   
   allCsvFiles.forEach(fullPath => {
     const fileName = path.basename(fullPath);
@@ -245,16 +388,24 @@ function processAndCopyFiles() {
       successCount++;
     } else {
       console.warn(`❌ 변환 실패: ${fileName}`);
+      failedFiles.push(fileName);
       failCount++;
     }
   });
   
   console.log(`\n📊 결과: 성공 ${successCount}개, 실패 ${failCount}개\n`);
+  
+  if (failedFiles.length > 0 && failedFiles.length <= 20) {
+    console.log('❌ 변환 실패한 파일 목록:');
+    failedFiles.forEach(file => console.log(`   - ${file}`));
+    console.log('');
+  }
+  
   return successCount;
 }
 
 // ========================================
-// CSV 파일 분석
+// CSV 파일 분석 - 역매핑 테이블 사용
 // ========================================
 function analyzeCSVFiles() {
   console.log('📊 CSV 파일 분석 중...\n');
@@ -264,38 +415,91 @@ function analyzeCSVFiles() {
   
   files.forEach(file => {
     try {
-      let content = fs.readFileSync(path.join(OUTPUT_DIR, file), 'utf8');
-      
-      // UTF-8 BOM 제거
-      if (content.charCodeAt(0) === 0xFEFF) {
-        content = content.slice(1);
-      }
-      
-      const parsed = Papa.parse(content, {
-        header: true,
-        skipEmptyLines: true
+      const content = fs.readFileSync(path.join(OUTPUT_DIR, file), 'utf8');
+      const parsed = Papa.parse(content, { 
+        header: true, 
+        skipEmptyLines: true 
       });
       
-      const parts = file.replace('.csv', '').split('-');
+      const fileName = file.replace('.csv', '');
+      let examName, year, session;
       
-      let examCode, year, session;
+      // 패턴 1: firefighter-career-2018-1-law.csv
+      let match = fileName.match(/^firefighter-career-(\d{4})-(\d+)-(.+)$/);
+      if (match) {
+        examName = REVERSE_EXAM_MAP['firefighter-career'];
+        year = match[1];
+        session = `${match[2]}-${match[3]}`;
+      }
       
-      if (parts.length >= 3) {
-        if (/^\d{4}$/.test(parts[parts.length - 2])) {
-          session = parts[parts.length - 1];
-          year = parts[parts.length - 2];
-          examCode = parts.slice(0, parts.length - 2).join('-');
-        } else {
-          year = parts.find(p => /^\d{4}$/.test(p));
-          session = parts[parts.length - 1];
-          examCode = parts.slice(0, parts.indexOf(year)).join('-');
+      // 패턴 2: firefighter-open-2016-1-law.csv
+      if (!examName) {
+        match = fileName.match(/^firefighter-open-(\d{4})-(\d+)-(.+)$/);
+        if (match) {
+          examName = REVERSE_EXAM_MAP['firefighter-open'];
+          year = match[1];
+          session = `${match[2]}-${match[3]}`;
         }
       }
       
-      const examName = Object.keys(EXAM_MAP).find(key => EXAM_MAP[key] === examCode);
+      // 패턴 3: firefighter-2018-1-intro.csv
+      if (!examName) {
+        match = fileName.match(/^firefighter-(\d{4})-(\d+)-(.+)$/);
+        if (match) {
+          examName = REVERSE_EXAM_MAP['firefighter'];
+          year = match[1];
+          session = `${match[2]}-${match[3]}`;
+        }
+      }
+      
+      // 패턴 4: nat-7-disaster-2015-3-urban.csv
+      if (!examName) {
+        match = fileName.match(/^(nat-\d+-disaster|local-\d+-disaster)-(\d{4})-(\d+)-(.+)$/);
+        if (match) {
+          examName = REVERSE_EXAM_MAP[match[1]];
+          year = match[2];
+          session = `${match[3]}-${match[4]}`;
+        }
+      }
+      
+      // 패턴 5: const-safety-2005-1-extra.csv
+      if (!examName) {
+        match = fileName.match(/^(.+)-(\d{4})-(\d+)-extra$/);
+        if (match) {
+          examName = REVERSE_EXAM_MAP[match[1]];
+          year = match[2];
+          session = `${match[3]}-extra`;
+        }
+      }
+      
+      // 패턴 6: ind-hygiene-2005-1-1.csv
+      if (!examName) {
+        match = fileName.match(/^(.+)-(\d{4})-(\d+)-(\d+)$/);
+        if (match) {
+          examName = REVERSE_EXAM_MAP[match[1]];
+          year = match[2];
+          session = `${match[3]}-${match[4]}`;
+        }
+      }
+      
+      // 패턴 7: 일반 패턴 examcode-year-session.csv
+      if (!examName) {
+        const parts = fileName.split('-');
+        if (parts.length >= 3) {
+          const potentialYear = parts[parts.length - 2];
+          const potentialSession = parts[parts.length - 1];
+          
+          if (/^\d{4}$/.test(potentialYear)) {
+            const examCode = parts.slice(0, -2).join('-');
+            examName = REVERSE_EXAM_MAP[examCode];
+            year = potentialYear;
+            session = potentialSession;
+          }
+        }
+      }
       
       if (!examName) {
-        console.warn(`⚠️  시험명 역매핑 실패: ${file}`);
+        console.warn(`⚠️  시험명 식별 실패: ${file}`);
         return;
       }
       
@@ -508,6 +712,7 @@ function printStatistics(examData) {
   
   let totalSessions = 0;
   let totalQuestions = 0;
+  let emptyExams = [];
   
   Object.keys(CATEGORY_MAP).forEach(category => {
     console.log(`\n📁 ${category}`);
@@ -517,9 +722,12 @@ function printStatistics(examData) {
       const questionCount = sessions.reduce((sum, s) => sum + s.questionCount, 0);
       
       if (sessions.length > 0) {
-        console.log(`   └─ ${examName}: ${sessions.length}회차, ${questionCount}문제`);
+        console.log(`   ✅ ${examName}: ${sessions.length}회차, ${questionCount}문제`);
         totalSessions += sessions.length;
         totalQuestions += questionCount;
+      } else {
+        console.log(`   ❌ ${examName}: 데이터 없음`);
+        emptyExams.push(examName);
       }
     });
   });
@@ -529,13 +737,19 @@ function printStatistics(examData) {
   console.log(`총 회차: ${totalSessions}개`);
   console.log(`총 문제 수: ${totalQuestions}문제`);
   console.log(`${'='.repeat(50)}\n`);
+  
+  if (emptyExams.length > 0) {
+    console.log('⚠️  데이터가 없는 시험:');
+    emptyExams.forEach(exam => console.log(`   - ${exam}`));
+    console.log('\n💡 이 시험들은 database 폴더에 파일이 없거나 파일명 패턴이 맞지 않습니다.');
+  }
 }
 
 // ========================================
 // 메인 실행
 // ========================================
 function main() {
-  console.log('🚀 전체 데이터베이스 마이그레이션 시작\n');
+  console.log('🚀 전체 데이터베이스 마이그레이션 시작 (중복 제거 버전)\n');
   console.log(`원본 폴더: ${DATABASE_DIR}`);
   console.log(`출력 폴더: ${OUTPUT_DIR}\n`);
   
@@ -554,7 +768,7 @@ function main() {
     console.log('✅ 모든 마이그레이션 작업이 완료되었습니다!\n');
     console.log('다음 단계:');
     console.log('1. git add public/data/*.csv public/exams-config.js');
-    console.log('2. git commit -m "fix: 전체 마이그레이션 - UTF-8 BOM 제거 및 모든 함수 포함"');
+    console.log('2. git commit -m "Fix: 중복 매핑 제거 및 역매핑 개선"');
     console.log('3. git push origin main');
     
   } catch (error) {

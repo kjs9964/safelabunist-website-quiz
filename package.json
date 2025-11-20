@@ -26,5 +26,14 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
-  }
+  },
+  "main": "aggregate-data.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjs9964/safelabunist-website-quiz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kjs9964/safelabunist-website-quiz/issues"
+  },
+  "homepage": "https://github.com/kjs9964/safelabunist-website-quiz#readme"
 }
