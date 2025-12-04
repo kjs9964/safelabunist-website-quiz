@@ -1,5 +1,5 @@
-// complete-migration-fixed.js - 중복 매핑 제거 버전
-// 중복 examCode 문제 해결
+// complete-migration-final.js - 최종 개선 버전
+// 소방설비산업기사/기사 특수 패턴 지원 (밑줄 2개: 전기__, 기계__)
 
 const fs = require('fs');
 const path = require('path');
@@ -30,7 +30,7 @@ const EXAM_MAP = {
   '위험물산업기사': 'hazmat-ind',
   '위험물기능사': 'hazmat-tech',
   
-  // 소방 - 중복 제거, (기계분야)/(전기분야)만 사용
+  // 소방 - 중복 제거
   '소방설비기사(기계분야)': 'fire-equip-mech',
   '소방설비기사(전기분야)': 'fire-equip-elec',
   '소방설비산업기사(기계분야)': 'fire-equip-ind-mech',
@@ -152,15 +152,40 @@ function convertMergedPattern(originalName) {
 }
 
 function convertExtraPattern(originalName) {
-  const match = originalName.match(/^(\d{4})_(.+?)_(\d+)회추가\.csv$/);
-  if (!match) return null;
+  // 패턴1: YYYY_시험명_N회추가.csv
+  let match = originalName.match(/^(\d{4})_(.+?)_(\d+)회추가\.csv$/);
+  if (match) {
+    const [_, year, examName, session] = match;
+    const examCode = EXAM_MAP[examName];
+    
+    if (!examCode) return null;
+    
+    return { fileName: `${examCode}-${year}-${session}-extra.csv`, examName, year, session: `${session}-extra` };
+  }
   
-  const [_, year, examName, session] = match;
-  const examCode = EXAM_MAP[examName];
+  // 패턴2: YYYY_시험명_N회_추가.csv (밑줄 포함)
+  match = originalName.match(/^(\d{4})_(.+?)_(\d+)회_추가\.csv$/);
+  if (match) {
+    const [_, year, examName, session] = match;
+    const examCode = EXAM_MAP[examName];
+    
+    if (!examCode) return null;
+    
+    return { fileName: `${examCode}-${year}-${session}-extra.csv`, examName, year, session: `${session}-extra` };
+  }
   
-  if (!examCode) return null;
+  // 패턴3: YYYY_시험명_N회_추가시험.csv
+  match = originalName.match(/^(\d{4})_(.+?)_(\d+)회_추가시험\.csv$/);
+  if (match) {
+    const [_, year, examName, session] = match;
+    const examCode = EXAM_MAP[examName];
+    
+    if (!examCode) return null;
+    
+    return { fileName: `${examCode}-${year}-${session}-extra.csv`, examName, year, session: `${session}-extra` };
+  }
   
-  return { fileName: `${examCode}-${year}-${session}-extra.csv`, examName, year, session: `${session}-extra` };
+  return null;
 }
 
 function convertSecurityPattern(originalName) {
@@ -172,6 +197,114 @@ function convertSecurityPattern(originalName) {
   const examName = '경비지도사(소방학)';
   
   return { fileName: `${examCode}-${year}-1.csv`, examName, year, session: '1' };
+}
+
+// 🆕 소방설비산업기사 특수 패턴 (밑줄 2개)
+// 패턴: 2003_소방설비산업기사_전기__1회.csv
+function convertFireEquipIndPattern(originalName) {
+  const match = originalName.match(/^(\d{4})_소방설비산업기사_(전기|기계)__(\d+)회\.csv$/);
+  if (!match) return null;
+  
+  const [_, year, type, session] = match;
+  const examName = type === '전기' ? '소방설비산업기사(전기분야)' : '소방설비산업기사(기계분야)';
+  const examCode = type === '전기' ? 'fire-equip-ind-elec' : 'fire-equip-ind-mech';
+  
+  return { 
+    fileName: `${examCode}-${year}-${session}.csv`, 
+    examName, 
+    year, 
+    session 
+  };
+}
+
+// 🆕 소방설비산업기사 괄호 패턴
+// 패턴: 2003_소방설비산업기사(전기)_1회.csv
+function convertFireEquipIndParenPattern(originalName) {
+  // 패턴1: 일반 회차
+  let match = originalName.match(/^(\d{4})_소방설비산업기사\((전기|기계)\)_(\d+)회\.csv$/);
+  if (match) {
+    const [_, year, type, session] = match;
+    const examName = type === '전기' ? '소방설비산업기사(전기분야)' : '소방설비산업기사(기계분야)';
+    const examCode = type === '전기' ? 'fire-equip-ind-elec' : 'fire-equip-ind-mech';
+    
+    return { 
+      fileName: `${examCode}-${year}-${session}.csv`, 
+      examName, 
+      year, 
+      session 
+    };
+  }
+  
+  // 패턴2: 통합 회차 (예: 1,2회_통합)
+  match = originalName.match(/^(\d{4})_소방설비산업기사\((전기|기계)\)_(\d+),(\d+)회[_\s]*(통합|통합기출문제)?\.csv$/);
+  if (match) {
+    const [_, year, type, session1] = match;
+    const examName = type === '전기' ? '소방설비산업기사(전기분야)' : '소방설비산업기사(기계분야)';
+    const examCode = type === '전기' ? 'fire-equip-ind-elec' : 'fire-equip-ind-mech';
+    
+    return { 
+      fileName: `${examCode}-${year}-${session1}.csv`, 
+      examName, 
+      year, 
+      session: session1
+    };
+  }
+  
+  return null;
+}
+
+// 🆕 소방설비기사 특수 패턴 (밑줄 2개)
+// 패턴: 2003_소방설비기사_전기__1회.csv
+function convertFireEquipPattern(originalName) {
+  const match = originalName.match(/^(\d{4})_소방설비기사_(전기|기계)__(\d+)회\.csv$/);
+  if (!match) return null;
+  
+  const [_, year, type, session] = match;
+  const examName = type === '전기' ? '소방설비기사(전기분야)' : '소방설비기사(기계분야)';
+  const examCode = type === '전기' ? 'fire-equip-elec' : 'fire-equip-mech';
+  
+  return { 
+    fileName: `${examCode}-${year}-${session}.csv`, 
+    examName, 
+    year, 
+    session 
+  };
+}
+
+// 🆕 소방설비기사 괄호 패턴
+// 패턴: 2003_소방설비기사(전기)_1회.csv
+function convertFireEquipParenPattern(originalName) {
+  // 패턴1: 일반 회차
+  let match = originalName.match(/^(\d{4})_소방설비기사\((전기|기계)\)_(\d+)회\.csv$/);
+  if (match) {
+    const [_, year, type, session] = match;
+    const examName = type === '전기' ? '소방설비기사(전기분야)' : '소방설비기사(기계분야)';
+    const examCode = type === '전기' ? 'fire-equip-elec' : 'fire-equip-mech';
+    
+    return { 
+      fileName: `${examCode}-${year}-${session}.csv`, 
+      examName, 
+      year, 
+      session 
+    };
+  }
+  
+  // 패턴2: 통합 회차 (예: 1,2회_통합)
+  match = originalName.match(/^(\d{4})_소방설비기사\((전기|기계)\)_(\d+),(\d+)회[_\s]*(통합|통합기출문제)?\.csv$/);
+  if (match) {
+    const [_, year, type, session1] = match;
+    const examName = type === '전기' ? '소방설비기사(전기분야)' : '소방설비기사(기계분야)';
+    const examCode = type === '전기' ? 'fire-equip-elec' : 'fire-equip-mech';
+    
+    return { 
+      fileName: `${examCode}-${year}-${session1}.csv`, 
+      examName, 
+      year, 
+      session: session1
+    };
+  }
+  
+  return null;
 }
 
 function convertFirefighterPattern(originalName) {
@@ -320,6 +453,10 @@ function convertFileName(originalName) {
          convertFirefighterPattern(originalName) ||
          convertFireFacilityPattern(originalName) ||
          convertFireEduPattern(originalName) ||
+         convertFireEquipIndPattern(originalName) ||      // 🆕 소방설비산업기사 밑줄2개
+         convertFireEquipIndParenPattern(originalName) || // 🆕 소방설비산업기사 괄호
+         convertFireEquipPattern(originalName) ||         // 🆕 소방설비기사 밑줄2개
+         convertFireEquipParenPattern(originalName) ||    // 🆕 소방설비기사 괄호
          convertIrregularPattern(originalName) ||
          convertGovExamPattern(originalName) ||
          convertDisasterPattern(originalName);
@@ -749,7 +886,11 @@ function printStatistics(examData) {
 // 메인 실행
 // ========================================
 function main() {
-  console.log('🚀 전체 데이터베이스 마이그레이션 시작 (중복 제거 버전)\n');
+  console.log('🚀 전체 데이터베이스 마이그레이션 시작 (최종 버전)\n');
+  console.log('🆕 지원 패턴:');
+  console.log('   - 소방설비산업기사_전기__N회');
+  console.log('   - 소방설비산업기사(전기)_N회');
+  console.log('   - 시험명_N회_추가\n');
   console.log(`원본 폴더: ${DATABASE_DIR}`);
   console.log(`출력 폴더: ${OUTPUT_DIR}\n`);
   
@@ -768,7 +909,7 @@ function main() {
     console.log('✅ 모든 마이그레이션 작업이 완료되었습니다!\n');
     console.log('다음 단계:');
     console.log('1. git add public/data/*.csv public/exams-config.js');
-    console.log('2. git commit -m "Fix: 중복 매핑 제거 및 역매핑 개선"');
+    console.log('2. git commit -m "Add: 소방설비 다양한 패턴 및 추가시험 지원"');
     console.log('3. git push origin main');
     
   } catch (error) {

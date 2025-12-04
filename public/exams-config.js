@@ -1,5 +1,5 @@
 // exams-config.js - 시험 데이터 구조 설정 파일
-// 자동 생성됨 - 2025. 11. 20. 오후 4:44:02
+// 자동 생성됨 - 2025. 12. 4. 오후 5:54:39
 
 const EXAM_STRUCTURE = {
     "재난안전": {
@@ -899,7 +899,344 @@ const EXAM_STRUCTURE = {
             "건설안전산업기사": {
                 "displayName": "건설안전산업기사",
                 "icon": "🏗️",
-                "sessions": []
+                "sessions": [
+                    {
+                        "year": 2020,
+                        "session": "3",
+                        "fileName": "const-safety-ind-2020-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2020,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2020-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2019,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2019-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2019,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2019-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2019,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2019-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2018,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2018-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2018,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2018-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2018,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2018-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2017,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2017-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2017,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2017-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2017,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2017-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2016,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2016-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2016,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2016-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2016,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2016-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2015,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2015-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2015,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2015-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2015,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2015-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2014,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2014-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2014,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2014-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2014,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2014-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2013,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2013-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2013,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2013-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2013,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2013-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2012,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2012-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2012,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2012-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2012,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2012-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2011,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2011-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2011,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2011-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2010,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2010-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2010,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2010-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2010,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2010-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2009,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2009-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2009,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2009-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2009,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2009-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2008,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2008-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2008,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2008-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2008,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2008-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2007,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2007-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2007,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2007-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2007,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2007-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2006,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2006-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2006,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2006-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2006,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2006-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2005,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2005-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2005,
+                        "session": "3",
+                        "fileName": "const-safety-ind-2005-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2005,
+                        "session": "1-extra",
+                        "fileName": "const-safety-ind-2005-1-extra.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2005,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2005-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2004,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2004-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2004,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2004-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2004,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2004-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2003,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2003-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2003,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2003-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2003,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2003-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2002,
+                        "session": "4",
+                        "fileName": "const-safety-ind-2002-4.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2002,
+                        "session": "2",
+                        "fileName": "const-safety-ind-2002-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2002,
+                        "session": "1",
+                        "fileName": "const-safety-ind-2002-1.csv",
+                        "questionCount": 100
+                    }
+                ]
             },
             "산업안전기사": {
                 "displayName": "산업안전기사",
@@ -1264,7 +1601,338 @@ const EXAM_STRUCTURE = {
             "산업안전산업기사": {
                 "displayName": "산업안전산업기사",
                 "icon": "👷",
-                "sessions": []
+                "sessions": [
+                    {
+                        "year": 2020,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2020-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2020,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2020-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2019,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2019-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2019,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2019-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2019,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2019-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2018,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2018-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2018,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2018-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2018,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2018-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2017,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2017-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2017,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2017-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2017,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2017-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2016,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2016-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2016,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2016-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2016,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2016-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2015,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2015-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2015,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2015-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2015,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2015-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2014,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2014-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2014,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2014-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2014,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2014-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2013,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2013-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2013,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2013-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2013,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2013-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2012,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2012-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2012,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2012-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2012,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2012-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2011,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2011-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2011,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2011-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2011,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2011-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2010,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2010-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2010,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2010-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2010,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2010-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2009,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2009-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2009,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2009-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2009,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2009-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2008,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2008-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2008,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2008-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2008,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2008-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2007,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2007-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2007,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2007-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2007,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2007-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2006,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2006-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2006,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2006-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2006,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2006-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2005,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2005-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2005,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2005-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2004,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2004-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2004,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2004-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2004,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2004-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2003,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2003-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2003,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2003-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2003,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2003-1.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2002,
+                        "session": "3",
+                        "fileName": "ind-safety-ind-2002-3.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2002,
+                        "session": "2",
+                        "fileName": "ind-safety-ind-2002-2.csv",
+                        "questionCount": 100
+                    },
+                    {
+                        "year": 2002,
+                        "session": "1",
+                        "fileName": "ind-safety-ind-2002-1.csv",
+                        "questionCount": 100
+                    }
+                ]
             },
             "산업위생관리기사": {
                 "displayName": "산업위생관리기사",
@@ -1635,7 +2303,296 @@ const EXAM_STRUCTURE = {
             "산업위생관리산업기사": {
                 "displayName": "산업위생관리산업기사",
                 "icon": "🔬",
-                "sessions": []
+                "sessions": [
+                    {
+                        "year": 2020,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2020-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2020,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2020-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2019,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2019-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2019,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2019-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2019,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2019-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2018,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2018-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2018,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2018-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2018,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2018-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2017,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2017-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2017,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2017-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2017,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2017-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2016,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2016-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2016,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2016-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2016,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2016-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2015,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2015-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2015,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2015-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2015,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2015-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2014,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2014-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2014,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2014-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2014,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2014-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2013,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2013-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2013,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2013-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2013,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2013-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2012,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2012-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2012,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2012-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2012,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2012-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2011,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2011-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2011,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2011-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2010,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2010-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2010,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2010-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2010,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2010-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2009,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2009-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2008,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2008-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2007,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2007-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2007,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2007-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2006,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2006-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2005,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2005-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2005,
+                        "session": "1-extra",
+                        "fileName": "ind-hygiene-ind-2005-1-extra.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2005,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2005-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2004,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2004-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2004,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2004-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2004,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2004-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2003,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2003-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2003,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2003-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2003,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2003-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2002,
+                        "session": "3",
+                        "fileName": "ind-hygiene-ind-2002-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2002,
+                        "session": "2",
+                        "fileName": "ind-hygiene-ind-2002-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2002,
+                        "session": "1",
+                        "fileName": "ind-hygiene-ind-2002-1.csv",
+                        "questionCount": 80
+                    }
+                ]
             },
             "인간공학기사": {
                 "displayName": "인간공학기사",
@@ -3493,7 +4450,320 @@ const EXAM_STRUCTURE = {
             "소방설비산업기사(전기분야)": {
                 "displayName": "소방설비산업기사(전기분야)",
                 "icon": "⚡",
-                "sessions": []
+                "sessions": [
+                    {
+                        "year": 2020,
+                        "session": "3",
+                        "fileName": "fire-equip-ind-elec-2020-3.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2020,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2020-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2019,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2019-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2019,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2019-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2019,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2019-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2018,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2018-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2018,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2018-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2018,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2018-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2017,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2017-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2017,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2017-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2017,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2017-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2016,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2016-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2016,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2016-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2016,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2016-1.csv",
+                        "questionCount": 79
+                    },
+                    {
+                        "year": 2015,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2015-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2015,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2015-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2015,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2015-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2014,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2014-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2014,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2014-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2014,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2014-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2013,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2013-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2013,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2013-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2013,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2013-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2012,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2012-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2012,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2012-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2012,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2012-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2011,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2011-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2011,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2011-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2011,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2011-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2010,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2010-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2010,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2010-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2010,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2010-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2009,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2009-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2009,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2009-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2009,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2009-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2008,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2008-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2008,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2008-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2008,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2008-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2007,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2007-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2007,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2007-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2007,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2007-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2006,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2006-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2006,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2006-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2006,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2006-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2005,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2005-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2005,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2005-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2005,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2005-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2004,
+                        "session": "4",
+                        "fileName": "fire-equip-ind-elec-2004-4.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2004,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2004-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2004,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2004-1.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2003,
+                        "session": "2",
+                        "fileName": "fire-equip-ind-elec-2003-2.csv",
+                        "questionCount": 80
+                    },
+                    {
+                        "year": 2003,
+                        "session": "1",
+                        "fileName": "fire-equip-ind-elec-2003-1.csv",
+                        "questionCount": 80
+                    }
+                ]
             },
             "소방시설관리사": {
                 "displayName": "소방시설관리사",
